@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-const unhandledRejection = require("unhandled-rejection");
+// let unhandledRejection = require("unhandled-rejection");
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -39,9 +39,6 @@ function displayData() {
         if (err) throw err;
         console.log("Welcome to our store!  Here's our products available for sale: ");
         for (var i = 0; i < rows.length; i++) {
-            // console.log(rows);
-            // console.log("i = " + i);
-            // console.log(rows[i]);
             console.log(
                 "ID= " + rows[i].item_id,
                 ":  " + rows[i].product_name,
@@ -54,51 +51,73 @@ function displayData() {
 
 displayData();
 
-setTimeout(orderProduct, 4000);
+setTimeout(orderProduct, 1000);
 
 function orderProduct() {
-    inquirer.prompt([
-        {
-            type: "input",
-            name: "chooseID",
-            message: "Please enter the ID of the item you'd like to purchase."
-        },
-    ]).then(function (answer) {
-        if (answer.chooseID) {
-            console.log("Great, thanks for your interest in product ID # " + answer.chooseID);
-        } else {
-            console.log("Thanks for vising our store.  We hope to see you again soon!");
-        }
-    }).catch(function (err) {
-        console.log(err);  
-        
-     }).then(function (answer) {
-        connection.query(`SELECT * FROM products WHERE item_id ='${answer.chooseID}'`, function (err, row) {
-            // SELECT * FROM top5000 WHERE artist = 'Mariah Carey';
-            
-            console.log(answer.chooseID);
-            console.log(
-                "ID= " + row[0].item_id,
-                ":  " + row.product_name,
-                row.department_name,
-                row.price,
-                row.stock_quantity);
-                
-                console.log(row);
-                
-            }).catch(function (err) {
-               console.log(err);  
-            });
-            // }).then(function (answer) {
-
+    return new Promise(function (resolve, reject) {
+        // setTimeout(() => {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    name: "chooseID",
+                    message: "Please enter the ID of the item you'd like to purchase."
+                },
+            ])
+            // if (!err) {
+            //     resolve();
+            // } else {
+            //     reject("error in ID choosing");
             // }
-        })
-    }
+            // }, 1000);
+            
+        }).then(function (choice) {
+            console.log("from prompt - you have chosen " + choice);
+            setTimeout(() => {
+
+            console.log("from first .then function " + choice)
+            // alert(answer*2);
+            if (choice) {
+                console.log("Great, thanks for your interest in product ID # " + choice);
+            } else {
+                console.log("Thanks for vising our store.  We hope to see you again soon!");
+            }
+            connection.query(`SELECT * FROM products WHERE item_id ='${answer}'`, function (err, row) {
+                // SELECT * FROM top5000 WHERE artist = 'Mariah Carey';
+
+                console.log(answer);
+                console.log(
+                    "ID= " + row[0].item_id,
+                    ":  " + row.product_name,
+                    row.department_name,
+                    row.price,
+                    row.stock_quantity);
+
+                console.log(row);
+
+            }, 2000);
+        });
+    }).catch(err => console.log(err));
+}
+
+
+    // var Promise = require('promise');
+
+    // var promise = new Promise(function (resolve, reject) {
+    //   get('http://www.google.com', function (err, res) {
+    //     if (err) reject(err);
+    //     else resolve(res);
+    //   });
+    // });
+
+
+
+
+
 
 // var promise1 = new Promise(function(resolve, reject) {
 //     throw 'Uh-oh!';
 //   });
-  
+
 //   promise1.catch(function(error) {
 //     console.log(error);
 //   });
