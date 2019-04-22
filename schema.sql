@@ -24,6 +24,7 @@ VALUES ("Vans Tennis Shoes", "Shoes", 45.00, 2500),
 ("Ragdoll Lounge Wear Bottoms", "Women's Apparel", 52.00, 457),
 ("Ragdoll Lounge Wear Top", "Women's Apparel", 61.00, 480);
 
+
 SELECT * FROM products;
 
 

@@ -52,53 +52,48 @@ function displayData() {
 displayData();
 
 setTimeout(orderProduct, 1000);
+units = "";
+choice = "";
 
-function orderProduct() {
-    return new Promise(function (resolve, reject) {
-        // setTimeout(() => {
-            inquirer.prompt([
-                {
-                    type: "input",
-                    name: "chooseID",
-                    message: "Please enter the ID of the item you'd like to purchase."
-                },
-            ])
-            // if (!err) {
-            //     resolve();
-            // } else {
-            //     reject("error in ID choosing");
-            // }
-            // }, 1000);
-            
-        }).then(function (choice) {
-            console.log("from prompt - you have chosen " + choice);
-            setTimeout(() => {
+function orderProduct(choice) {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "chooseID",
+            message: "Please enter the ID of the item you'd like to purchase."
+        },
+        {
+            type: "input",
+            name: "units",
+            message: "How many units would you like to purchase?"
+        }
+    ]).then(function (choice) {
+        console.log("from prompt - you have chosen " + choice.chooseID);
+        setTimeout(() => {
 
-            console.log("from first .then function " + choice)
-            // alert(answer*2);
-            if (choice) {
-                console.log("Great, thanks for your interest in product ID # " + choice);
-            } else {
-                console.log("Thanks for vising our store.  We hope to see you again soon!");
-            }
-            connection.query(`SELECT * FROM products WHERE item_id ='${answer}'`, function (err, row) {
-                // SELECT * FROM top5000 WHERE artist = 'Mariah Carey';
-
-                console.log(answer);
-                console.log(
-                    "ID= " + row[0].item_id,
-                    ":  " + row.product_name,
-                    row.department_name,
-                    row.price,
-                    row.stock_quantity);
-
+        connection.query(`SELECT stock_quantity FROM products WHERE item_id ='${choice.chooseID}'`, function (err, row) {
+                if(err) {
+                    console.log(err);
+                }
+                console.log("thanks for your interest in purchasing " + choice.units + " of item #" + choice.chooseID);
                 console.log(row);
+                var quantity = JSON.parse(JSON.stringify(row));
+                console.log("quantity = " + quantity);
+              console.log(row[row.length - 1]);
+              var pos = row.indexOf('150');
+              console.log(pos);
+              console.log(row[-1]);
 
+                // if (quantity >= choice.units) {
+
+                // } else {
+                //     console.log("I'm sorry, we have insufficient inventory to process your order.")
+                // }
             }, 2000);
         });
-    }).catch(err => console.log(err));
+}).catch(error => console.log(error)
+);
 }
-
 
     // var Promise = require('promise');
 
@@ -108,10 +103,6 @@ function orderProduct() {
     //     else resolve(res);
     //   });
     // });
-
-
-
-
 
 
 // var promise1 = new Promise(function(resolve, reject) {
@@ -129,4 +120,4 @@ function orderProduct() {
 //           resolve(userInput());
 //       }, 2000);
 //       });
-//   }
+
