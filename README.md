@@ -11,4 +11,6 @@ The app will show you all the products in the store including thier name, price 
 The first question is to identify the ID of the item you'd like to purchase, as you can see at the bottom of the screen above.
 Enter the ID number and press enter.
 
+The next question, at the bottom of the screen below, is to enter the number of units you'd like to purchase.  Enter the number, and press enter.
 
+<img width="599" alt="Screen Shot 2019-04-22 at 11 20 44 PM" src="https://user-images.githubusercontent.com/48226041/56559023-4b368300-6555-11e9-8a35-7c38d428c1b1.png">
