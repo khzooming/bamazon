@@ -19,3 +19,7 @@ The last step of the process is to inform you of the total price, and the amount
 <img width="602" alt="Screen Shot 2019-04-22 at 11 23 28 PM" src="https://user-images.githubusercontent.com/48226041/56559172-abc5c000-6555-11e9-8930-9015e3db9684.png">
 
 If we run the app again and check the stock amount for item #2, you can see that it's been updated in the database to reflect the latest order.  Note the stock amount for #2 is 573.
+<img width="597" alt="Screen Shot 2019-04-22 at 11 30 03 PM" src="https://user-images.githubusercontent.com/48226041/56559485-a2892300-6556-11e9-8be9-ccff347f0cf3.png">
+
+We check the stock first before completing an order.  In the event that we don't have enough product, we let you know that we don't have a sufficient quantity.
+In this example we'll order item #9, which has a stock of 38 pieces in stock.
