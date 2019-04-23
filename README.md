@@ -23,3 +23,5 @@ If we run the app again and check the stock amount for item #2, you can see that
 
 We check the stock first before completing an order.  In the event that we don't have enough product, we let you know that we don't have a sufficient quantity.
 In this example we'll order item #9, which has a stock of 38 pieces in stock.
+
+<img width="598" alt="Screen Shot 2019-04-22 at 11 33 43 PM" src="https://user-images.githubusercontent.com/48226041/56559676-1cb9a780-6557-11e9-9931-565b88da2bca.png">
